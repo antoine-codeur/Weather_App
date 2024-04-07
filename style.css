@@ -14,8 +14,7 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 90vh;
-  padding-block: 5vh;
+  height: auto;
 }
 
 #weather-icon {
