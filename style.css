@@ -14,17 +14,6 @@ body, html {
   justify-content: center;
   height: auto;
 }
-#weather-icon {
-  width: 100%;
-  height: auto;
-  background: none;
-}
-@media (min-width: 1600px) {
-  #weather-icon {
-    width: auto;
-    height: 50vh;
-  }
-}
 #temperature {
     color: white;
     font-size: 48px;

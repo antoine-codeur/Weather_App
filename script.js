@@ -32,7 +32,7 @@ function updateWeather(data) {
     // Mappage des ID météo aux icônes et couleurs de fond
     const weatherStyles = {
         'thunderstorm': {
-            icon: '<spline-viewer url="https://prod.spline.design/zMGTH7mNeNmYJUsr/scene.splinecode"></spline-viewer>',
+            icon: '<spline-viewer url="https://prod.spline.design/zMGTH7mNeNmYJUsr/scene.splinecode" height="300"></spline-viewer>',
             background: '#505050' // Gris foncé pour contraster avec les icônes d'orage
         },
         'drizzle': {
@@ -40,7 +40,7 @@ function updateWeather(data) {
             background: '#88C0D0' // Bleu clair pour la bruine
         },
         'rain': {
-            icon: '<spline-viewer url="https://prod.spline.design/uJg9h3B73-OacStH/scene.splinecode"></spline-viewer>',
+            icon: '<spline-viewer url="https://prod.spline.design/uJg9h3B73-OacStH/scene.splinecode" height="300"></spline-viewer>',
             background: '#4C566A' // Gris bleuté pour la pluie
         },
         'snow': {
@@ -52,7 +52,7 @@ function updateWeather(data) {
             background: '#ECEFF4' // Gris clair pour les conditions atmosphériques, favorisant la lisibilité
         },
         'clear': {
-            icon: '<spline-viewer url="https://prod.spline.design/c8Ajq4y4CYPGMudc/scene.splinecode"></spline-viewer>',
+            icon: '<spline-viewer url="https://prod.spline.design/c8Ajq4y4CYPGMudc/scene.splinecode" height="300"></spline-viewer>',
             background: '#EBCB8B' // Jaune doux pour un temps clair et ensoleillé
         }
     };
