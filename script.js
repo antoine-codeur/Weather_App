@@ -32,7 +32,7 @@ function updateWeather(data) {
     // Mappage des ID météo aux icônes et couleurs de fond
     const weatherStyles = {
         'thunderstorm': {
-            icon: '<spline-viewer url="your_spline_url_for_thunderstorm"></spline-viewer>',
+            icon: '<spline-viewer url="https://prod.spline.design/zMGTH7mNeNmYJUsr/scene.splinecode"></spline-viewer>',
             background: '#505050' // Gris foncé pour contraster avec les icônes d'orage
         },
         'drizzle': {
@@ -70,7 +70,7 @@ function updateWeather(data) {
     } else if (weatherId >= 701 && weatherId <= 781) {
         styleKey = 'atmosphere';
     } else if (weatherId === 800) {
-        styleKey = 'rain';
+        styleKey = 'clear';
     }
 
     const weatherStyle = weatherStyles[styleKey];
