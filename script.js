@@ -54,6 +54,14 @@ function updateWeather(data) {
         'clear': {
             icon: '<spline-viewer url="https://prod.spline.design/c8Ajq4y4CYPGMudc/scene.splinecode" height="300"></spline-viewer>',
             background: '#EBCB8B' // Jaune doux pour un temps clair et ensoleillé
+        },
+        'cloudySun': {
+            icon: '<spline-viewer url="https://prod.spline.design/e-wT6A-KpmjHWBy6/scene.splinecode" height="300"></spline-viewer>',
+            background: '#EBCB8B' // Jaune doux pour un temps clair et ensoleillé
+        },
+        'cloudy': {
+            icon: '<spline-viewer url="https://prod.spline.design/VJ7J0l6VNYD4Vnvj/scene.splinecode" height="300"></spline-viewer>',
+            background: '#EBCB8B' // Jaune doux pour un temps clair et ensoleillé
         }
     };
 
@@ -71,6 +79,10 @@ function updateWeather(data) {
         styleKey = 'atmosphere';
     } else if (weatherId === 800) {
         styleKey = 'clear';
+    } else if (weatherId >= 801 && weatherId <= 802) {
+        styleKey = 'cloudySun';
+    } else if (weatherId === 803) {
+        styleKey = 'cloudy';
     }
 
     const weatherStyle = weatherStyles[styleKey];
