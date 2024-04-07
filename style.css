@@ -2,13 +2,11 @@
   font-family: 'PermanentMarker';
   src: url('PermanentMarker-Regular.ttf') format('truetype');
 }
-
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'PermanentMarker', cursive;
 }
-
 #app {
   display: flex;
   flex-direction: column;
@@ -16,11 +14,17 @@ body, html {
   justify-content: center;
   height: auto;
 }
-
 #weather-icon {
-  height: 50vh;
+  width: 100%;
+  height: auto;
+  background: none;
 }
-
+@media (min-width: 1600px) {
+  #weather-icon {
+    width: auto;
+    height: 50vh;
+  }
+}
 #temperature {
     color: white;
     font-size: 48px;
