@@ -1,34 +1,56 @@
 document.addEventListener('DOMContentLoaded', function() {
     const apiKey = '8998525009e06055a3bebc2fd8475631';
     const baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
-    const city = 'Clermont-Ferrand'; // Modification pour Clermont-Ferrand
     const units = 'metric'; // Les unités : metric pour Celsius
+    let defaultCity = 'Paris'; // Ville par défaut
 
-    const url = `${baseUrl}?q=${city}&appid=${apiKey}&units=${units}`;
+    function buildUrl(city, lat, lon) {
+        if(lat && lon) {
+            return `${baseUrl}?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`;
+        } else {
+            return `${baseUrl}?q=${city}&appid=${apiKey}&units=${units}`;
+        }
+    }
 
-    fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-        })
-        .then(data => {
-            updateWeather(data);
-        })
-        .catch(error => {
-            console.error('Could not fetch the data:', error);
+    function fetchWeather(url, city) {
+        fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                updateWeather(data, city);
+            })
+            .catch(error => {
+                console.error('Could not fetch the data:', error);
+            });
+    }
+
+    if ('geolocation' in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            const url = buildUrl(null, lat, lon);
+            fetchWeather(url, null); // La ville sera mise à jour une fois obtenue de l'API
+        }, function() {
+            const url = buildUrl(defaultCity);
+            fetchWeather(url, defaultCity);
         });
-});
-function updateWeather(data) {
+    } else {
+        const url = buildUrl(defaultCity);
+        fetchWeather(url, defaultCity);
+    }
+})
+function updateWeather(data, cityName) {
     console.log(data);
     const appElement = document.querySelector('#app');
     const iconElement = document.getElementById('weather-icon');
     const temperatureElement = document.getElementById('temperature');
     const descriptionElement = document.getElementById('weather-description');
-    
+    const city = cityName || data.name;
     const weatherId = data.weather[0].id; // L'ID de la condition météorologique
-
     // Mappage des ID météo aux icônes et couleurs de fond
     const weatherStyles = {
         'thunderstorm': {
@@ -61,7 +83,7 @@ function updateWeather(data) {
         },
         'cloudy': {
             icon: '<spline-viewer url="https://prod.spline.design/VJ7J0l6VNYD4Vnvj/scene.splinecode" height="300"></spline-viewer>',
-            background: '#EBCB8B' // Jaune doux pour un temps clair et ensoleillé
+            background: '#4C566A' // Gris bleuté
         }
     };
 
@@ -81,12 +103,13 @@ function updateWeather(data) {
         styleKey = 'clear';
     } else if (weatherId >= 801 && weatherId <= 802) {
         styleKey = 'cloudySun';
-    } else if (weatherId === 803) {
+    } else if (weatherId === 803 && weatherId === 804) {
         styleKey = 'cloudy';
     }
-
     const weatherStyle = weatherStyles[styleKey];
-
+    
+    document.getElementById('loading').style.display = 'none';
+    document.querySelector('h1').textContent = `${city}`;
     // Mise à jour de l'icône météo et du fond
     if (weatherStyle) {
         iconElement.innerHTML = weatherStyle.icon;
