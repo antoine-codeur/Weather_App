@@ -35,3 +35,16 @@ body, html {
   font-size: 20px;
   color: #333;
 }
+#city-selector {
+  height: 32px;
+  width: 25%;
+  text-align: center;
+  background-color: #ffffe550;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  box-shadow: 2px 2px 10px #dcdcf550;
+}
+#city-selector:focus {
+  outline: 1px solid #333;
+}
