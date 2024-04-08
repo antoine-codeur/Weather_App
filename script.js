@@ -89,12 +89,20 @@ function updateWeather(data, cityName) {
             background: '#505050' // Gris foncé pour contraster avec les icônes d'orage
         },
         'drizzle': {
-            icon: '<spline-viewer url="your_spline_url_for_drizzle"></spline-viewer>',
-            background: '#88C0D0' // Bleu clair pour la bruine
+            icon: '<spline-viewer url="https://prod.spline.design/uJg9h3B73-OacStH/scene.splinecode" height="300"></spline-viewer>',
+            background: '#6E7F80', // Gris vert pour la bruine
+        },
+        'lightRain': {
+            icon: '<spline-viewer url="https://prod.spline.design/uJg9h3B73-OacStH/scene.splinecode" height="300"></spline-viewer>',
+            background: '#A4B0BE', // Gris bleuté plus clair pour la petite pluie
         },
         'rain': {
             icon: '<spline-viewer url="https://prod.spline.design/uJg9h3B73-OacStH/scene.splinecode" height="300"></spline-viewer>',
-            background: '#4C566A' // Gris bleuté pour la pluie
+            background: '#4C566A', // Gris bleuté pour la pluie
+        },
+        'heavyRain': {
+            icon: '<spline-viewer url="https://prod.spline.design/uJg9h3B73-OacStH/scene.splinecode" height="300"></spline-viewer>',
+            background: '#2C3E50', // Bleu foncé pour les pluies intenses
         },
         'snow': {
             icon: '<spline-viewer url="your_spline_url_for_snow"></spline-viewer>',
@@ -123,7 +131,11 @@ function updateWeather(data, cityName) {
         styleKey = 'thunderstorm';
     } else if (weatherId >= 300 && weatherId <= 321) {
         styleKey = 'drizzle';
-    } else if (weatherId >= 500 && weatherId <= 531) {
+    } else if (weatherId == 500) { // Pluie légère
+        styleKey = 'lightRain';
+    } else if (weatherId > 500 && weatherId <= 504) { // Pluie modérée à intense
+        styleKey = 'heavyRain';
+    } else if (weatherId >= 505 && weatherId <= 531) { // Pluie très intense à extrême
         styleKey = 'rain';
     } else if (weatherId >= 600 && weatherId <= 622) {
         styleKey = 'snow';
@@ -162,7 +174,14 @@ function addCityToSelector(cityName, isGeoLocation = false) {
 }
 function initializeCitySelector() {
     // Liste initiale des villes
-    const cities = ['Paris', 'Lyon', 'Marseille', 'Toulouse', 'Nice'];
-    citySelector.innerHTML = ''; // Nettoyage du sélecteur
+    const cities = [
+        'Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 
+        'Nantes', 'Montpellier', 'Strasbourg', 'Bordeaux', 'Lille', 
+        'Rennes', 'Reims', 'Le Havre', 'Saint-Étienne', 'Toulon', 
+        'Grenoble', 'Dijon', 'Angers', 'Nîmes', 'Villeurbanne', 
+        'Clermont-Ferrand', 'Le Mans', 'Aix-en-Provence', 'Brest', 'Limoges', 
+        'Tours', 'Amiens', 'Perpignan', 'Metz', 'Besançon'
+    ];
+        citySelector.innerHTML = ''; // Nettoyage du sélecteur
     cities.forEach(city => addCityToSelector(city));
 }
