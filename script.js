@@ -2,7 +2,11 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Affichage de l'indicateur de chargement
     document.getElementById('loading').style.display = 'flex';
-
+    const closeRetryBtn = document.getElementById('closeRetry');
+    closeRetryBtn.addEventListener('click', function() {
+        document.getElementById('retryLocation').style.display = 'none'; // Cacher le bouton de réessai
+        this.style.display = 'none'; // Cacher également l'icône de fermeture
+    });
     // Configuration de base
     const apiKey = '8998525009e06055a3bebc2fd8475631';
     const baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
@@ -34,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }, error => {
             console.warn(`Erreur de géolocalisation : ${error.message}`);
             document.getElementById('retryLocation').style.display = 'block'; // Affichage du bouton de réessai
+            document.getElementById('closeRetry').style.display = 'flex'; // Affichage du bouton close
             fetchWeather(buildUrl(defaultCity), defaultCity);
         });
     } else {
@@ -121,8 +126,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Bouton de réessai pour la géolocalisation
     document.getElementById('retryLocation').addEventListener('click', function() {
+        alert('Pour permettre la localisation, veuillez activer les permissions de localisation pour ce site dans les paramètres de votre navigateur, puis actualisez la page.');
         navigator.geolocation.getCurrentPosition(position => {
             document.getElementById('retryLocation').style.display = 'none';
+            document.getElementById('closeRetry').style.display = 'none';
             const {latitude: lat, longitude: lon} = position.coords;
             fetchWeather(buildUrl(null, lat, lon), null);
         }, error => {
