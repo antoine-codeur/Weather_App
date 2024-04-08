@@ -1,15 +1,12 @@
 let citySelector;
-
 document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('loading').style.display = 'flex';
     const apiKey = '8998525009e06055a3bebc2fd8475631';
     const baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
     const units = 'metric'; // Les unités : metric pour Celsius
     let defaultCity = 'Paris'; // Ville par défaut
-    
     citySelector = document.getElementById('city-selector');
     initializeCitySelector(); // Initialisation avec des villes par défaut
-
     citySelector.addEventListener('change', function() {
         const selectedCity = this.value;
         if (selectedCity) {
@@ -17,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
             fetchWeather(url, selectedCity);
         }
     });
-
     if ('geolocation' in navigator) {
         navigator.geolocation.getCurrentPosition(function(position) {
             const lat = position.coords.latitude;
@@ -35,7 +31,6 @@ document.addEventListener('DOMContentLoaded', function() {
         fetchWeather(url, defaultCity);  
     }
 });
-
 function buildUrl(city, lat, lon) {
     const apiKey = '8998525009e06055a3bebc2fd8475631';
     const baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
@@ -46,7 +41,6 @@ function buildUrl(city, lat, lon) {
         return `${baseUrl}?q=${city}&appid=${apiKey}&units=${units}`;
     }
 }
-
 function fetchWeather(url, city, isGeoLocation = false) {
     fetch(url)
         .then(response => {
@@ -67,19 +61,15 @@ function fetchWeather(url, city, isGeoLocation = false) {
             console.error('Could not fetch the data:', error);
         });
 }
-
 function updateWeather(data, cityName) {
     console.log(data);
     const appElement = document.querySelector('#app');
     const iconElement = document.getElementById('weather-icon');
     const temperatureElement = document.getElementById('temperature');
     const descriptionElement = document.getElementById('weather-description');
-    const city = cityName || data.name; // La ville actuelle
-    
+    const city = cityName || data.name; // La ville actuelle   
     // Trouve et sélectionne la bonne option dans le sélecteur
     const options = citySelector.options;
-
-
     for(let i = 0; i < options.length; i++) {
         if(options[i].value === city) {
             citySelector.selectedIndex = i;
@@ -159,7 +149,6 @@ function updateWeather(data, cityName) {
     descriptionElement.textContent = weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1); // Capitalize the first letter
     document.getElementById('loading').style.display = 'none';
 }
-
 function addCityToSelector(cityName, isGeoLocation = false) {
     if (cityName && !Array.from(citySelector.options).some(option => option.value === cityName)) {
         const newOption = new Option(cityName, cityName, true, true);
@@ -171,8 +160,6 @@ function addCityToSelector(cityName, isGeoLocation = false) {
         }
     }
 }
-
-
 function initializeCitySelector() {
     // Liste initiale des villes
     const cities = ['Paris', 'Lyon', 'Marseille', 'Toulouse', 'Nice'];
