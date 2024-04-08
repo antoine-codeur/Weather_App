@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('loading').style.display = 'flex';
     const apiKey = '8998525009e06055a3bebc2fd8475631';
     const baseUrl = 'https://api.openweathermap.org/data/2.5/weather';
     const units = 'metric'; // Les unités : metric pour Celsius
@@ -108,7 +109,6 @@ function updateWeather(data, cityName) {
     }
     const weatherStyle = weatherStyles[styleKey];
     
-    document.getElementById('loading').style.display = 'none';
     document.querySelector('h1').textContent = `${city}`;
     // Mise à jour de l'icône météo et du fond
     if (weatherStyle) {
@@ -120,4 +120,5 @@ function updateWeather(data, cityName) {
     temperatureElement.textContent = `${Math.round(data.main.temp)}°C`;
     const weatherDescription = data.weather[0].description;
     descriptionElement.textContent = weatherDescription.charAt(0).toUpperCase() + weatherDescription.slice(1); // Capitalize the first letter
+    document.getElementById('loading').style.display = 'none';
 }
