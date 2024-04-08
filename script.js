@@ -122,7 +122,7 @@ function updateWeather(data, cityName) {
         },
         'cloudy': {
             icon: '<spline-viewer url="https://prod.spline.design/VJ7J0l6VNYD4Vnvj/scene.splinecode" height="300"></spline-viewer>',
-            background: '#4C566A' // Gris bleuté
+            background: '#6E7F80' // Gris vert
         }
     };
     // Sélection de l'icône et du style de fond basée sur l'ID météo
